@@ -2,7 +2,7 @@ package parse
 
 import "regexp"
 
-const emoticonsRegexp = `\([0-9a-zA-Z]{1,20}\)`
+const emoticonsRegexp = `\([0-9a-zA-Z]{1,15}\)`
 
 func parseEmoticons(msg string) ([]string, error) {
 	re := regexp.MustCompile(emoticonsRegexp)
