@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -28,8 +29,13 @@ func New() *Handlers {
 }
 
 func (h *Handlers) ListenAndServe() error {
-	log.Println("Listening on port", DEFAULT_PORT)
-	return http.ListenAndServe(DEFAULT_PORT, h.endpoints())
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = DEFAULT_PORT
+	}
+	log.Println("Listening on port", port)
+	return http.ListenAndServe(":"+port, h.endpoints())
 }
 
 func (h *Handlers) endpoints() *mux.Router {
